@@ -1,36 +1,155 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🎧 Moodify — AI Mood-Based Music Recommendation App
 
-## Getting Started
+Moodify is a **Spotify-inspired music experience** that uses **AI + Spotify API** to recommend songs based on how you feel.  
+Instead of clicking playlists, users **describe their mood in natural language**, and the app curates music that matches emotion, vibe, and culture.
 
-First, run the development server:
+> _“I feel sad and tired, I want Moroccan hip-hop”_ → 🎶 Perfect matches
+
+---
+
+## ✨ Features
+
+- 🧠 AI mood understanding (ChatGPT-style)
+- 🎵 Spotify music recommendations
+- 🌍 Country & language awareness (Moroccan, Arabic, French, English)
+- 🎭 Emotion-aware filtering (sad ≠ happy)
+- 🎧 Track previews
+- 🖤 Spotify-inspired creative UI
+- ⚡ Fast & modern stack
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+- Next.js (App Router)
+- React
+- Tailwind CSS
+- shadcn/ui
+- Aceternity UI
+- React Bits (animated backgrounds)
+
+### Backend
+- Next.js API Routes
+- Spotify Web API
+- Google Gemini AI
+
+---
+
+## 🧠 How It Works
+
+1. User types their mood in natural language
+2. AI analyzes:
+   - Emotion (sad, happy, calm, angry…)
+   - Music style
+   - Country & language
+3. AI generates **emotion-safe Spotify search queries**
+4. Spotify API returns matching tracks
+5. Opposite moods are filtered out
+6. Final playlist is displayed with previews 🎧
+
+---
+
+## 📂 Project Structure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+src/
+├─ app/
+│  ├─ mood/
+│  │  └─ page.jsx
+│  ├─ api/
+│  │  ├─ recommend/
+│  │  └─ spotify/
+├─ components/
+│  ├─ Sidebar.jsx
+│  ├─ MoodHeader.jsx
+│  ├─ TrackRow.jsx
+├─ lib/
+│  ├─ mood-ai.js
+│  └─ spotify.js
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🔐 Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a `.env.local` file:
 
-## Learn More
+```env
+SPOTIFY_CLIENT_ID=your_spotify_client_id
+SPOTIFY_CLIENT_SECRET=your_spotify_client_secret
+SPOTIFY_ACCESS_TOKEN=your_spotify_access_token
+GEMINI_API_KEY=your_gemini_api_key
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔑 Spotify Setup
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Create an app on the Spotify Developer Dashboard
+2. Add redirect URI:
+   ```
+   http://127.0.0.1:3000/api/auth/spotify/callback
+   ```
+3. Complete OAuth login
+4. Use the access token in your environment variables
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🚀 Getting Started
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm install
+npm run dev
+```
+
+Open:
+```
+http://localhost:3000
+```
+
+---
+
+## 🧪 Example Prompt
+
+```
+I feel sad and nostalgic.
+I want Moroccan hip hop from 2017.
+```
+
+🎯 Result:
+- Correct emotion
+- Correct country
+- No happy/party tracks
+- Spotify-based recommendations
+
+---
+
+## 📌 Roadmap
+
+- 🎚 Emotion intensity control
+- 🎵 Spotify audio-feature filtering
+- 💾 Save mood playlists
+- 📱 Mobile optimization
+- 🔊 Full Spotify playback
+
+---
+
+## 🧑‍💻 Author
+
+**Seddik Zaker**  
+Full-Stack Web Developer  
+Focused on AI-driven user experiences
+
+---
+
+## ⭐ Support
+
+If you like this project:
+- ⭐ Star the repo
+- 🍴 Fork it
+- 💬 Share feedback
+
+---
+
+**Moodify** — Music that understands how you feel 🎶🖤
