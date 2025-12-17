@@ -5,7 +5,6 @@ let cachedToken = null;
 let tokenExpiresAt = 0;
 
 async function getSpotifyAccessToken() {
-  // reuse token if still valid
   if (cachedToken && Date.now() < tokenExpiresAt) {
     return cachedToken;
   }
@@ -48,7 +47,7 @@ export async function searchTracks(query) {
       },
     }
   );
-
+ 
   if (!res.ok) {
     const error = await res.text();
     console.error("Spotify search error:", error);
@@ -60,8 +59,13 @@ export async function searchTracks(query) {
   return data.tracks.items.map(track => ({
     id: track.id,
     name: track.name,
-    artist: track.artists.map(a => a.name).join(", "),
-    image: track.album.images?.[0]?.url ?? null,
-    preview: track.preview_url,
+    artists: track.artists.map(a => ({ name: a.name })), // tableau d’objets pour compatibilité
+    album: {
+      images: track.album.images,
+      name: track.album.name,
+    },
+    preview: track.preview_url,        // pour écouter un extrait si besoin
+    uri: track.uri,                    // spotify:track:ID
+    external_urls: track.external_urls // contient spotify URL
   }));
 }
