@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 
-export default function TrackCard({ track, onPlay }) {
+export default function TrackCard({ track, onPlay, isPlaying }) {
   if (!track) return null;
 
   const image =
@@ -16,14 +16,23 @@ export default function TrackCard({ track, onPlay }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 15 }}
-      animate={{ opacity: 1, y: 0 }}
-      whileHover={{ scale: 1.03 }}
+      animate={{
+        opacity: 1,
+        y: 0,
+        scale: isPlaying ? 1.05 : 1,
+      }}
       transition={{ duration: 0.25 }}
       onClick={() => onPlay(track)}
-      className="cursor-pointer bg-white/5 hover:bg-white/10 p-4 rounded-xl transition group"
+      className={`cursor-pointer p-4 mt-3 rounded-xl transition group
+        ${
+          isPlaying
+            ? "bg-green-500/20 ring-2 ring-green-500 shadow-lg"
+            : "bg-white/5 hover:bg-white/10"
+        }
+      `}
     >
       {/* IMAGE */}
-      <div className="relative">
+      <div className="relative ">
         <img
           src={image}
           alt={track.name}
@@ -31,12 +40,25 @@ export default function TrackCard({ track, onPlay }) {
           loading="lazy"
         />
 
-        {/* PLAY OVERLAY */}
-        <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition">
-          <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center shadow-lg">
-            <span className="text-black text-lg ml-1">▶</span>
+        {/* PLAYING WAVES */}
+        {isPlaying && (
+          <div className="absolute bottom-2 right-2 flex gap-[2px]">
+            {[1, 2, 3, 4].map((i) => (
+              <motion.span
+                key={i}
+                className="w-1 bg-green-400 rounded-full"
+                animate={{
+                  height: ["6px", "16px", "6px"],
+                }}
+                transition={{
+                  duration: 0.8,
+                  repeat: Infinity,
+                  delay: i * 0.1,
+                }}
+              />
+            ))}
           </div>
-        </div>
+        )}
       </div>
 
       {/* TITLE */}
